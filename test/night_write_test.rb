@@ -10,13 +10,7 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_does_NightRider_class_exist
-    assert nw
-  end
-
-  def test_does_it_output_string
-    skip
-    nw.read
-    assert_equal message.txt, ARGV[0]
+    assert_instance_of NightWriter, nw
   end
 
 
