@@ -13,5 +13,9 @@ class NightWriterTest < Minitest::Test
     assert_instance_of NightWriter, nw
   end
 
-
+  def test_new_baille_file_exists
+    skip
+    refute new_braille
+  end
+  
 end

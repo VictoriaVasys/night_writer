@@ -1,6 +1,6 @@
 # number_characters = File.read(ARGV[0]).length
 # puts "Read '#{ARGV[0]}'; it contains #{number_characters} characters"
-require './file_eader.rb'
+require './file_reader.rb'
 
 
 class NightWriter
