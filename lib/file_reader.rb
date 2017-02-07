@@ -6,6 +6,6 @@
 class FileReader
   def read
     filename = ARGV[0]
-    content = File.read(filename)
+    File.read(filename)
   end
 end

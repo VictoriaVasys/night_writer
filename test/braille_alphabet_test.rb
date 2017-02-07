@@ -1,6 +1,12 @@
-module BrailleAlphabet
-  def braille_alphabet
-    {"a" => ['0.','..','..'],
+require 'minitest/autorun'
+require 'minitest/pride'
+require "./lib/braille_alphabet"
+
+
+class BrailleAlphabetTest < Minitest::Test
+  include BrailleAlphabet
+  def test_it_returns_braille_alphabet
+    expected = {"a" => ['0.','..','..'],
       "b" => ['0.','0.','..'],
       "c" => ['00','..','..'],
       "d" => ['00','.0','..'],
@@ -35,11 +41,11 @@ module BrailleAlphabet
       "caps" => ['..','..','.0'],
       " " => ['..','..','..']
     }
+    assert_equal expected, braille_alphabet
   end
 
-
-  def braille_numbers
-    {
+  def test_it_returns_braille_numbers
+    expected = {
     '#' => ['.0','.0','00'],
     '0' => ['.0','00','..'],
     '1' => ['0.','..','..'],
@@ -52,6 +58,7 @@ module BrailleAlphabet
     '8' => ['0.','00','..'],
     '9' => ['.0','0.','..']
     }
+    assert_equal expected, braille_numbers
   end
+
 end
-#h_braille = braille_alphabet"a"]

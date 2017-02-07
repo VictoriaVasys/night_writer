@@ -2,13 +2,12 @@
 class NightWriterNoReader
   attr_reader :message, :word
   attr_accessor :braille_alphabet
-  def initialize
-    @message = "hello me"
-   
+  def initialize(message = "")
+    @message = message
   end
 
   def parse
-    message.split(//)  
+    message.split(//)
   end
 
   # def translate_letter_to_braille
@@ -21,7 +20,7 @@ class NightWriterNoReader
     braille_letter_array = letters.map do |letter|
       braille_alphabet[letter]
     end
-    
+
     line_1 = []
     line_2 = []
     line_3 = []
@@ -40,10 +39,11 @@ class NightWriterNoReader
   end
 
   def create_braille_file
-    new_braille = File.open(braille.txt, "w")
-    new_braille.write(word)
+    new_braille = File.open(ARGV[1], "w")
+    new_braille.write(translate_word_to_braille)
+    require "pry"; binding.pry
   end
-  
+
   def braille_alphabet
     braille_alphabet = {
       "a" => ['0.','..','..'],

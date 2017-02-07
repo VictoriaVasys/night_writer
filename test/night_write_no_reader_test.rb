@@ -12,10 +12,9 @@ class NightWriterNoReaderTest < Minitest::Test
     skip
     assert_instance_of NightWriterNoReader, nwnr
   end
-  
+
   def test_it_takes_input
-    skip
-    nwnr("hello")    
+    nwnr = NightWriterNoReader.new("hello")
     assert_equal "hello", nwnr.message
   end
 
@@ -34,5 +33,11 @@ class NightWriterNoReaderTest < Minitest::Test
   def test_it_can_translate_word_into_Braille
     # nwnr("hello me")
     assert_equal "0.0.0.0.0...000.\n00.00.0..0.....0\n....0.0.0...0...", nwnr.translate_word_to_braille
+  end
+
+  def test_it_creates_braille_file
+    nw = NightWriterNoReader.new
+    create = nw.create_braille_file
+    assert create
   end
 end
