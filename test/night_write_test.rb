@@ -2,19 +2,15 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require "./lib/night_write"
 
-class NightWriterTest < Minitest::Test
+# If you want to run without arguments, comment out class instantiation at the bottom of night_write.rb
+class NightWriteTest < Minitest::Test
   attr_reader :nw
   def setup
-    @nw = NightWriter.new
+    @nw = NightWrite.new
   end
   
-  def test_nightwriter_class_exists
-    assert_instance_of NightWriter, nw
-  end
-
-  def test_it_reads_a_file_from_command_line
-    assert_equal FileReader, nw.reader.class
-    assert_equal "hello me", nw.reader.read # read in message.txt
+  def test_it_exists
+    assert_instance_of NightWrite, nw
   end
   
   def test_it_parses_string_into_letters
@@ -58,19 +54,23 @@ class NightWriterTest < Minitest::Test
     assert_equal "..0..0......0.0..0..0.0.0...000.0...\n..000.00....00.000....00.0...0.0..0.\n.0....0....0..0..0....0.....000.0000", nw.encode_to_braille("Hi! How are you?")
   end
 
-  def test_it_can_create_a_new_file # and that it's no longer than 80 chars (mult of 4)
-    nw.encode_braille_translation_to_file
-    assert File.exists?("braille.txt")
-  end
-  
-  def test_it_can_read_a_file_and_write_a_different_file_from_filename
-    # skip
+  def test_it_can_create_a_new_file 
+    skip
     nw.encode_file_to_braille
-    assert_equal "0.0.0.0.0...000.\n00.00.0..0.....0\n....0.0.0...0...", braille_txt
+    assert File.exists?("braille.txt")
+    assert_equal "0.0.0.0.0...000.\n00.00.0..0.....0\n....0.0.0...0...", File.read("./braille.txt")
   end
   
-  def braille_txt
-    File.read("./test/braille.txt")
+  def test_it_can_split_long_braille_into_lines_of_80_characters
+    nw.encode_to_braille("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    assert_equal "0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.\n..................................................................................\n..................................................................................\n0.\n..\n..", nw.format_long_lines
   end
-
+  
+  def test_it_can_translate_numbers_to_braille
+    assert_equal ".00.0000\n.00....0\n00......", nw.encode_to_braille("234")
+  end
+  
+  def test_it_can_return_numbers_and_letters_to_braille
+    assert_equal "0..0.....00.0000..\n000.00...00....000\n....0...00......0.", nw.encode_to_braille("hi! 234!")
+  end 
 end
