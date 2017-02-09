@@ -24,7 +24,7 @@ class NightWriterNoReader
     line_1 = []
     line_2 = []
     line_3 = []
-
+    require "pry"; binding.pry
     braille_letter_array.map do |letter|
       line_1 << letter[0]
       line_2 << letter[1]

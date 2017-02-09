@@ -1,5 +1,5 @@
-module BrailleAlphabet
-  def braille_alphabet
+module BrailleAlphaneumeric
+  def self.braille_alphabet
     {"a" => ['0.','..','..'],
       "b" => ['0.','0.','..'],
       "c" => ['00','..','..'],
@@ -38,7 +38,7 @@ module BrailleAlphabet
   end
 
 
-  def braille_numbers
+  def self.braille_numbers
     {
     '#' => ['.0','.0','00'],
     '0' => ['.0','00','..'],
